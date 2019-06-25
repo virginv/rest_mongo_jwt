@@ -1,0 +1,28 @@
+server:
+   port: 8090
+   
+app:
+   jwtSecret: JWTSuperSecretKey
+   jwtExpirationInMs: 120000
+
+spring:
+  profiles:
+   active: dev
+   include: swagger
+  data:
+   mongodb:
+      uri: mongodb+srv://m220student:m220password@cluster0-6ckbf.mongodb.net/?retryWrites=true&maxPoolSize=50&connectTimeoutMS=2000&replicaSet=Cluster0-shard-0
+      database: mflix
+      repositories:
+         enabled: true
+         
+   devtools:
+      restart:
+         enabled: true
+   logging:
+      level:
+          org.springframework: DEBUG
+
+logging:
+  level:
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG

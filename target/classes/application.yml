@@ -1,0 +1,24 @@
+# ===================================================================================================
+# Propiedades especificas de la aplicacion
+# ===================================================================================================
+info:
+   project:
+      version: 0.0.1
+      description: Proyecto Base JWT
+
+management:
+  context-path: /api/v1/*
+
+spring:
+   profiles:
+        active: dev
+   application:
+      name: rest_mongo_jwt
+   devtools:
+      restart:
+         enabled: false
+   logging:
+      level:
+          org.springframework: INFO
+
+    

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+	<property name="LOG.DIR" value="/logs" />
+	<property name="LOG.BACKUP" value="/logs" />
+
+	<property name="LOG.FILE.SIZE" value="10MB" />
+	<property name="BACKUP.COUNT" value="100" />
+
+	<appender name="FILE_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<append>true</append>
+		<file>${LOG.DIR}/Pruebas.log</file>
+		<encoder>
+			<pattern>%.-1level-%d{yyyy/MM/dd HH:mm:ss.SSS}- %c{30}- %m%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<maxIndex>${BACKUP.COUNT}</maxIndex>
+			<FileNamePattern>${LOG.BACKUP}/application.log.%i.gz</FileNamePattern>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>${LOG.FILE.SIZE}</maxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+			<pattern>%.-1level-%d{yyyy/MM/dd HH:mm:ss.SSS}- %c{30}- %m%n</pattern>
+        </encoder>
+    </appender>
+
+	<logger name="com.base" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE_LOG" />
+	</logger>
+	
+	<logger name="com.base.main.RestMongoApplication" level="ERROR" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE_LOG" />
+	</logger>
+
+	<root level="error">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE_LOG" />
+	</root>
+
+
+</configuration>
